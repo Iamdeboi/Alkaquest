@@ -1679,7 +1679,7 @@ Transform:
   m_GameObject: {fileID: 2796796728613868449}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2740,6 +2740,7 @@ GameObject:
   - component: {fileID: 7431721108451080456}
   - component: {fileID: 6961908728983059961}
   - component: {fileID: 2044048986833499843}
+  - component: {fileID: 3697195999136352465}
   m_Layer: 0
   m_Name: Third Person Aim Camera
   m_TagString: Untagged
@@ -2756,7 +2757,7 @@ Transform:
   m_GameObject: {fileID: 4216449467529906961}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.7, z: -4}
+  m_LocalPosition: {x: 0, y: 0.70000005, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2786,7 +2787,7 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 65
+    FieldOfView: 70
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000
@@ -2862,6 +2863,36 @@ MonoBehaviour:
   IgnoreTag: 
   AimDistance: 200
   NoiseCancellation: 1
+--- !u!114 &3697195999136352465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4216449467529906961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca7de3aefa901374ba29464584a3109a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineDecollider
+  CameraRadius: 0.4
+  Decollision:
+    Enabled: 1
+    ObstacleLayers:
+      serializedVersion: 2
+      m_Bits: 1
+    UseFollowTarget:
+      Enabled: 1
+      YOffset: 0
+    Damping: 0.5
+    SmoothingTime: 0
+  TerrainResolution:
+    Enabled: 1
+    TerrainLayers:
+      serializedVersion: 2
+      m_Bits: 1
+    MaximumRaycast: 10
+    Damping: 0.5
 --- !u!1 &4324194799548304417
 GameObject:
   m_ObjectHideFlags: 0
@@ -2955,7 +2986,7 @@ Transform:
   m_GameObject: {fileID: 4458754941375497087}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.7, z: -4}
+  m_LocalPosition: {x: 0, y: 0.70000005, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2994,7 +3025,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 65
+  field of view: 70
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -4083,7 +4114,7 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 2
+  m_Height: 1.8
   m_Radius: 0.35
   m_SlopeLimit: 45
   m_StepOffset: 0.3
@@ -4106,7 +4137,10 @@ MonoBehaviour:
   m_PlayerCamera: {fileID: 2374346817758940285}
   runAcceleration: 50
   runSpeed: 4
-  drag: 0.1
+  sprintAcceleration: 0.5
+  sprintSpeed: 7
+  drag: 30
+  movingThreshold: 0.01
   lookSensitivityH: 0.1
   lookSensitivityV: 0.1
   lookLimitV: 65
@@ -4122,6 +4156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22a37a042f97cd54b8e2359d01986b86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerLocomotionInput
+  holdToSprint: 1
 --- !u!114 &2095260324023036362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4147,7 +4182,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb5b561a7309c574ab2317a65b53ea63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimation
-  m_Animator: {fileID: 0}
+  m_Animator: {fileID: 7176695734495655489}
+  locomotionBlendSpeed: 4
 --- !u!1 &5564564014817117187
 GameObject:
   m_ObjectHideFlags: 0

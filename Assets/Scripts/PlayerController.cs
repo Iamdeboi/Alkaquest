@@ -13,6 +13,8 @@ public class PlayerController : Subject
     [Header("Base Movement")]
     public float runAcceleration = 0.25f;
     public float runSpeed = 4f;
+    public float sprintAcceleration = 0.5f;
+    public float sprintSpeed = 7f;
     public float drag = 0.1f;
     public float movingThreshold = 0.01f;
 
@@ -53,19 +55,29 @@ public class PlayerController : Subject
     {
         bool isMovementInput = m_PlayerLocomotionInput.MovementInput != Vector2.zero;
         bool isMovingLaterally = IsMovingLaterally();
+        bool isSprinting = m_PlayerLocomotionInput.SprintToggledOn && isMovingLaterally;
 
-        PlayerMovementState lateralState = isMovingLaterally || isMovementInput ? PlayerMovementState.Running : PlayerMovementState.Idling;
+        PlayerMovementState lateralState = isSprinting ? PlayerMovementState.Sprinting :
+                                            isMovingLaterally || isMovementInput ? PlayerMovementState.Running : PlayerMovementState.Idling;
+
         m_PlayerState.SetPlayerMovementState(lateralState);
     }
 
     private void HandleLateralMovement()
     {
+        // Create quick references for current state
+        bool isSprinting = m_PlayerState.CurrentPlayerMovementState == PlayerMovementState.Sprinting;
+
+        // State dependent accleration and speed
+        float lateralAcceleration = isSprinting ? sprintAcceleration : runAcceleration;
+        float clampLateralMagnitude = isSprinting ? sprintSpeed : runSpeed;
+        
         Vector3 cameraForwardXZ = new Vector3(m_PlayerCamera.transform.forward.x, 0f, m_PlayerCamera.transform.forward.z).normalized;
         Vector3 cameraRightXZ = new Vector3(m_PlayerCamera.transform.right.x, 0f, m_PlayerCamera.transform.right.z).normalized;
         Vector3 movementDirection = cameraRightXZ * m_PlayerLocomotionInput.MovementInput.x + cameraForwardXZ * m_PlayerLocomotionInput.MovementInput.y;
 
         // Kinematic equation calculations
-        Vector3 movementDelta = movementDirection * runAcceleration * Time.deltaTime;
+        Vector3 movementDelta = movementDirection * lateralAcceleration;
         Vector3 newVelocity = m_CharacterController.velocity + movementDelta;
 
         // Add drag to the player
@@ -74,7 +86,7 @@ public class PlayerController : Subject
         // Prevents velocity sending the player backwards if the velocity is too low a value considering drag
         // "IF new velocity's magnitude is > drag, THEN subtract drag from newVelocity. ELSE return Vector3.zero to clamp the newVelocity
         newVelocity = (newVelocity.magnitude > drag * Time.deltaTime) ? newVelocity - currentDrag : Vector3.zero;
-        newVelocity = Vector3.ClampMagnitude(newVelocity, runSpeed);
+        newVelocity = Vector3.ClampMagnitude(newVelocity, clampLateralMagnitude);
 
         // Move character once per tick ONLY!!!
         m_CharacterController.Move(newVelocity * Time.deltaTime);

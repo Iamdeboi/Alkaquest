@@ -1,3 +1,4 @@
+using System.Net.Mime;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -5,11 +6,11 @@ using UnityEngine.InputSystem;
 [DefaultExecutionOrder(-2)]
 public class PlayerLocomotionInput : MonoBehaviour, PlayerControls.IPlayerLocomotionMapActions
 {
-    // New Input System reference to Input Mapping
+    [SerializeField] private bool holdToSprint = true;
+
+    public bool SprintToggledOn {  get; private set; }
     public PlayerControls PlayerControls { get; private set; }
-    // Value between -1 and 1 to define the axis directions read from the Inputs
     public Vector2 MovementInput { get; private set; }
-    // Mouse delta value when looking
     public Vector2 LookInput { get; private set; }
 
 
@@ -39,5 +40,17 @@ public class PlayerLocomotionInput : MonoBehaviour, PlayerControls.IPlayerLocomo
     {
         // Converts the mouse input as the input direction of where the player is looking
         LookInput = context.ReadValue<Vector2>();
+    }
+
+    public void OnToggleSprint(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            SprintToggledOn = holdToSprint || !SprintToggledOn;
+        }
+        else if (context.canceled)
+        {
+            SprintToggledOn = !holdToSprint && SprintToggledOn;
+        }
     }
 }

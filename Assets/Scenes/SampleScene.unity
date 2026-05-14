@@ -520,11 +520,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &1962792927 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 7176695734495655489, guid: 033cf149021f76347b349bc844705d0b, type: 3}
-  m_PrefabInstance: {fileID: 3598205569157024939}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3598205569157024939
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -534,56 +529,24 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2623991117636577739, guid: 033cf149021f76347b349bc844705d0b, type: 3}
-      propertyPath: m_Animator
-      value: 
-      objectReference: {fileID: 1962792927}
-    - target: {fileID: 2623991117636577739, guid: 033cf149021f76347b349bc844705d0b, type: 3}
       propertyPath: locomotionBlendSpeed
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3248445760911731048, guid: 033cf149021f76347b349bc844705d0b, type: 3}
       propertyPath: drag
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 3248445760911731048, guid: 033cf149021f76347b349bc844705d0b, type: 3}
-      propertyPath: runSpeed
-      value: 4
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3248445760911731048, guid: 033cf149021f76347b349bc844705d0b, type: 3}
       propertyPath: runAcceleration
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 3248445760911731048, guid: 033cf149021f76347b349bc844705d0b, type: 3}
+      propertyPath: sprintAcceleration
       value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 4178859598372566711, guid: 033cf149021f76347b349bc844705d0b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4254590118888934254, guid: 033cf149021f76347b349bc844705d0b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.70000005
-      objectReference: {fileID: 0}
-    - target: {fileID: 4254590118888934254, guid: 033cf149021f76347b349bc844705d0b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4272307864311018259, guid: 033cf149021f76347b349bc844705d0b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.70000005
-      objectReference: {fileID: 0}
-    - target: {fileID: 4272307864311018259, guid: 033cf149021f76347b349bc844705d0b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4438161256731371175, guid: 033cf149021f76347b349bc844705d0b, type: 3}
-      propertyPath: m_Height
-      value: 1.8
       objectReference: {fileID: 0}
     - target: {fileID: 5417839161627361381, guid: 033cf149021f76347b349bc844705d0b, type: 3}
       propertyPath: m_Name
-      value: ThirdPersonController
-      objectReference: {fileID: 0}
-    - target: {fileID: 7431721108451080456, guid: 033cf149021f76347b349bc844705d0b, type: 3}
-      propertyPath: AvoidObstacles.Enabled
-      value: 0
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 9006453820890536872, guid: 033cf149021f76347b349bc844705d0b, type: 3}
       propertyPath: m_LocalPosition.x
