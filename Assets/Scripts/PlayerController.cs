@@ -2,7 +2,7 @@ using UnityEngine;
 
 
 [DefaultExecutionOrder(-1)]
-public class PlayerController : MonoBehaviour
+public class PlayerController : Subject
 {
     [Header("Components")]
     [SerializeField] private CharacterController m_CharacterController;
@@ -25,6 +25,11 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         m_PlayerLocomotionInput = GetComponent<PlayerLocomotionInput>();
+    }
+
+    private void Start()
+    {
+        NotifyObservers();
     }
 
     private void Update()
